@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #07071a;
+    color: #e8e8ed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(200, 241, 53, 0.3);
+    color: #c8f135;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0d0d20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #36365a;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a4a6a;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(13, 13, 32, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-200;
+  }
+
+  .glass-card-hover:hover {
+    border-color: rgba(200, 241, 53, 0.2);
+    box-shadow: 0 0 20px rgba(200, 241, 53, 0.05);
+  }
+
+  .btn-primary {
+    @apply bg-lime-400 text-obsidian-950 font-display font-700 rounded-xl px-6 py-3 transition-all duration-150 hover:bg-lime-500 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    font-weight: 700;
+  }
+
+  .btn-ghost {
+    @apply text-obsidian-300 rounded-xl px-4 py-2 transition-all duration-150 hover:bg-obsidian-800 hover:text-obsidian-100 active:scale-95;
+  }
+
+  .btn-danger {
+    @apply text-crimson-400 rounded-lg p-2 transition-all duration-150 hover:bg-crimson-500/10 active:scale-95;
+  }
+
+  .input-field {
+    @apply w-full bg-obsidian-900 border border-obsidian-700 rounded-xl px-4 py-3 text-obsidian-100 placeholder-obsidian-500 transition-all duration-150 outline-none focus:border-lime-400/50 focus:ring-1 focus:ring-lime-400/20;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .label {
+    @apply block text-xs font-500 text-obsidian-400 mb-1.5 uppercase tracking-wider;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .tab-btn {
+    @apply flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-500 transition-all duration-150;
+  }
+
+  .tab-btn-active {
+    @apply bg-lime-400 text-obsidian-950;
+  }
+
+  .tab-btn-inactive {
+    @apply text-obsidian-400 hover:text-obsidian-100 hover:bg-obsidian-800;
+  }
+
+  .stat-card {
+    @apply glass-card rounded-2xl p-6 flex flex-col gap-2;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+  .font-500 {
+    font-weight: 500;
+  }
+  .font-700 {
+    font-weight: 700;
+  }
+}
+
+/* Noise texture overlay */
+.noise-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Modal backdrop */
+.modal-overlay {
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Listening pulse ring */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.ping-slow {
+  animation: ping-slow 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
