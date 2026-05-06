@@ -49,7 +49,7 @@ export default function ReceiptUpload({ onAdd }: ReceiptUploadProps) {
     setUploading(true);
     try {
       const ext = f.name.split('.').pop()?.toLowerCase() || 'jpg';
-      const path = `receipts/${user.id}/${Date.now()}.${ext}`;
+      const path = `${user.id}/${Date.now()}.${ext}`;
       const { error: uploadError } = await supabase.storage
         .from('receipts')
         .upload(path, f, { contentType: f.type });
